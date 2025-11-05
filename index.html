@@ -7,8 +7,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    .letter p { font-size: clamp(18px, 2.8vw, 22px); line-height: 1.55; color: var(--ink-soft); }
+    .letter p {
+      font-size: clamp(18px, 2.8vw, 22px);
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 10px 0;
+    }
     .desk { width: min(980px, 96vw); height: min(640px, 78vh); }
+    .flip-badge {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      padding: 10px 16px;
+      border: 1px dashed #cfc7bb;
+      border-radius: 14px;
+      background: #fff6;
+      backdrop-filter: blur(4px);
+      cursor: pointer;
+      user-select: none;
+      z-index: 5;
+    }
   </style>
 </head>
 <body>
@@ -21,7 +39,6 @@
         <div class="tape t1"></div>
         <div class="tape t2"></div>
         <img class="bear" src="assets/cute_bear.png" alt="two cozy bears hugging">
-
         <div>
           <div class="title">for Viswanath</div>
           <div class="front-note">I wrote you a tiny postcard. flip it over ↓</div>
@@ -40,9 +57,17 @@
         <div class="letter">
           <div class="sticky"><small>psst—open me again later</small></div>
           <h2>i love you.</h2>
-          <p>i miss you in the small, ordinary moments—the stove clicking on, the quiet after a laugh, the walk from the door to the sofa.</p>
-          <p>if feelings could doodle, they'd draw us as two bears who keep finding each other.</p>
-          <p>this is me waving from my side of the day: hi, silly human. you are my favorite person.</p>
+
+          <p>i miss you in the small, ordinary moments — the stove clicking on, the quiet after a laugh, the walk from the door to the sofa. you’ve made my ordinary days glow a little brighter.</p>
+
+          <p>if feelings could doodle, they’d draw us as two bears who keep finding each other even when the page flips. you, me, a silly postcard, and the kind of warmth that doesn’t need fixing.</p>
+
+          <p>you exist in the background of everything nice. the morning light, a soft hoodie, the sound of tea being poured — they all remind me of you somehow.</p>
+
+          <p>sometimes i wish you could peek into my brain just to see how many small moments you live in. you’d roll your eyes, but i’d still tell you anyway.</p>
+
+          <p>this is me waving from my side of the day: hi, silly human. you are my favorite person, my best accidental habit, and the calmest chaos i’ve ever loved.</p>
+
           <img class="doodle d-give" style="position:absolute; left:-6px; bottom:-24px" src="assets/give_heart.png" alt="little figure giving a heart">
           <div class="footer">made by roopa, for v.</div>
         </div>
@@ -60,17 +85,23 @@
       const desk = document.getElementById("desk");
       const sky = document.getElementById("sky");
 
+      // reliable flip trigger
       function flip() {
         desk.classList.toggle("open");
-        rain(26);
+        rain(24);
       }
 
+      // expand clickable area
       ["flip1", "flip2", "flipHidden"].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.addEventListener("click", flip);
+        if (el) el.addEventListener("click", e => {
+          e.stopPropagation();
+          flip();
+        });
       });
       desk.addEventListener("dblclick", flip);
 
+      // black heart rain
       const heartSrc = "assets/black_heart.png";
       function drop(x) {
         const h = document.createElement("img");
@@ -78,14 +109,19 @@
         h.className = "heart";
         h.style.left = (x ?? Math.random() * window.innerWidth) + "px";
         h.style.bottom = "-40px";
-        h.style.animationDuration = 2600 + Math.random() * 1800 + "ms";
-        h.style.width = 16 + Math.random() * 20 + "px";
+        h.style.animationDuration = 2800 + Math.random() * 1500 + "ms";
+        h.style.width = 18 + Math.random() * 22 + "px";
         sky.appendChild(h);
         setTimeout(() => h.remove(), 4600);
       }
       function rain(n = 18) {
-        for (let i = 0; i < n; i++) setTimeout(() => drop(), i * 80);
+        for (let i = 0; i < n; i++) {
+          setTimeout(() => drop(), i * 100);
+        }
       }
+
+      // initial heart drift on load
+      setTimeout(() => rain(12), 1000);
     });
   </script>
 </body>
