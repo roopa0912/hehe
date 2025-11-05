@@ -7,40 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* --- core note fix --- */
-    .notes {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .note {
-      background: #fff;
-      border: 1px solid #e4dbcc;
-      border-radius: 10px;
-      padding: 12px 14px;
-      transition: all 0.25s ease;
-      position: relative;
-      cursor: pointer;
-    }
-    .note b {
-      display: block;
-      font-size: clamp(16px, 2.4vw, 18px);
-      margin-bottom: 4px;
-    }
-    .reveal {
-      opacity: 0;
-      transform: translateY(4px);
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.25s ease;
-      line-height: 1.5;
-    }
-    .note.open .reveal {
-      opacity: 1;
-      transform: translateY(0);
-      max-height: 400px;
-      padding-top: 4px;
-    }
+    .letter p { font-size: clamp(18px, 2.8vw, 22px); line-height: 1.55; color: var(--ink-soft); }
+    .desk { width: min(980px, 96vw); height: min(640px, 78vh); }
   </style>
 </head>
 <body>
@@ -53,11 +21,13 @@
         <div class="tape t1"></div>
         <div class="tape t2"></div>
         <img class="bear" src="assets/cute_bear.png" alt="two cozy bears hugging">
+
         <div>
           <div class="title">for Viswanath</div>
           <div class="front-note">I wrote you a tiny postcard. flip it over ↓</div>
           <div class="hint">(it’s a little silly, a little cozy, and 100% honest)</div>
         </div>
+
         <img class="doodle d-heart" style="left:24px; top:28px" src="assets/black_heart.png" alt="drawn heart">
         <img class="doodle d-flowers" style="left:38px; bottom:36px" src="assets/flowers.png" alt="tiny flowers">
         <img class="doodle d-cat" style="right:36px; bottom:44px" src="assets/cat_hi.png" alt="tiny cat peeking">
@@ -67,35 +37,16 @@
 
       <!-- Back -->
       <div class="side back">
-        <div class="grid">
-          <div class="letter">
-            <div class="sticky"><small>psst—open me again later</small></div>
-            <h2>i love you.</h2>
-            <p>i miss you in the small, ordinary moments—the stove clicking on, the quiet after a laugh, the walk from the door to the sofa.</p>
-            <p>if feelings could doodle, they'd draw us as two bears who keep finding each other.</p>
-            <p>this is me waving from my side of the day: hi, silly human. you are my favorite person.</p>
-            <img class="doodle d-give" style="position:absolute; left:-6px; bottom:-24px" src="assets/give_heart.png" alt="little figure giving a heart">
-            <div class="footer">made by roopa, for v.</div>
-          </div>
-
-          <!-- only three notes now -->
-          <div class="notes">
-            <div class="note">
-              <b>bear fact</b>
-              <div class="reveal">you’re the soft side of my hoodie.</div>
-            </div>
-
-            <div class="note">
-              <b>tonight’s plan</b>
-              <div class="reveal">call me. i’ll bring the worst jokes and the best attention.</div>
-            </div>
-
-            <div class="note">
-              <b>evidence</b>
-              <div class="reveal">well, i made this entire postcard, duh!</div>
-            </div>
-          </div>
+        <div class="letter">
+          <div class="sticky"><small>psst—open me again later</small></div>
+          <h2>i love you.</h2>
+          <p>i miss you in the small, ordinary moments—the stove clicking on, the quiet after a laugh, the walk from the door to the sofa.</p>
+          <p>if feelings could doodle, they'd draw us as two bears who keep finding each other.</p>
+          <p>this is me waving from my side of the day: hi, silly human. you are my favorite person.</p>
+          <img class="doodle d-give" style="position:absolute; left:-6px; bottom:-24px" src="assets/give_heart.png" alt="little figure giving a heart">
+          <div class="footer">made by roopa, for v.</div>
         </div>
+
         <div class="tape t3"></div>
         <div class="flip-badge" id="flip2">flip back</div>
       </div>
@@ -103,6 +54,7 @@
   </div>
 
   <button class="sr-only" id="flipHidden" aria-label="flip postcard">flip</button>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const desk = document.getElementById("desk");
@@ -110,7 +62,7 @@
 
       function flip() {
         desk.classList.toggle("open");
-        rain(20);
+        rain(26);
       }
 
       ["flip1", "flip2", "flipHidden"].forEach(id => {
@@ -119,15 +71,6 @@
       });
       desk.addEventListener("dblclick", flip);
 
-      // click toggle for notes
-      document.querySelectorAll(".note").forEach(note => {
-        note.addEventListener("click", e => {
-          e.stopPropagation();
-          note.classList.toggle("open");
-        });
-      });
-
-      // heart rain
       const heartSrc = "assets/black_heart.png";
       function drop(x) {
         const h = document.createElement("img");
