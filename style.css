@@ -76,18 +76,9 @@ body{
   right: 36px;
 }
 
-.d-flowers {
-  width: 110px;
-  bottom: 50px;
-  right: 70px;
-}
 
-.d-cat {
-  width: 100px;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
+
+
 
 
 .title{font-size:clamp(24px,3.6vw,36px);line-height:1.3;}
