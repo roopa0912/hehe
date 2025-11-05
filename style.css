@@ -259,4 +259,12 @@ body {
   box-shadow: 0 0 40px rgba(0,0,0,0.15);
   transform: rotateY(180deg) translateZ(1px);
 }
+/* make notes fully clickable and smooth */
+.note, .note * {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.note {
+  cursor: pointer;
+}
 
