@@ -8,70 +8,76 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="desk" id="desk">
-  <div class="sky" id="sky" aria-hidden="true"></div>
-  <div class="postcard" id="pc">
-    <!-- Front -->
-    <div class="side front">
-      <div class="tape t1"></div>
-      <div class="tape t2"></div>
-      <img class="bear" src="assets/cute_bear.png" alt="two cozy bears hugging">
-      <div>
-        <div class="title">for Viswanath</div>
-        <div class="front-note">I wrote you a tiny postcard. flip it over ↓</div>
-        <div class="hint">(it’s a little silly, a little cozy, and 100% honest)</div>
+  <!-- ✅ The flip script expects .open to toggle on this parent container -->
+  <div class="desk" id="desk">
+    <div class="sky" id="sky" aria-hidden="true"></div>
+
+    <div class="postcard" id="pc">
+      <!-- Front -->
+      <div class="side front">
+        <div class="tape t1"></div>
+        <div class="tape t2"></div>
+        <img class="bear" src="assets/cute_bear.png" alt="two cozy bears hugging">
+
+        <div>
+          <div class="title">for Viswanath</div>
+          <div class="front-note">I wrote you a tiny postcard. flip it over ↓</div>
+          <div class="hint">(it’s a little silly, a little cozy, and 100% honest)</div>
+        </div>
+
+        <!-- doodles -->
+        <img class="doodle d-heart" style="left:24px; top:28px" src="assets/black_heart.png" alt="drawn heart">
+        <img class="doodle d-flowers" style="left:38px; bottom:36px" src="assets/flowers.png" alt="tiny flowers">
+        <img class="doodle d-cat" style="right:36px; bottom:44px" src="assets/cat_hi.png" alt="tiny cat peeking">
+        <img class="doodle d-pink" style="right:24px; top:36px" src="assets/pink_heart.png" alt="pink heart bubble">
+        <div class="flip-badge" id="flip1">tap to flip</div>
       </div>
 
-      <!-- doodles -->
-      <img class="doodle d-heart" style="left:24px; top:28px" src="assets/black_heart.png" alt="drawn heart">
-      <img class="doodle d-flowers" style="left:38px; bottom:36px" src="assets/flowers.png" alt="tiny flowers">
-      <img class="doodle d-cat" style="right:36px; bottom:44px" src="assets/cat_hi.png" alt="tiny cat peeking">
-      <img class="doodle d-pink" style="right:24px; top:36px" src="assets/pink_heart.png" alt="pink heart bubble">
-      <div class="flip-badge" id="flip1">tap to flip</div>
-    </div>
+      <!-- Back -->
+      <div class="side back">
+        <div class="grid">
+          <div class="letter">
+            <div class="sticky"><small>psst—open me again later</small></div>
+            <h2>i love you.</h2>
+            <p>i miss you in the small, ordinary moments—the stove clicking on, the quiet after a laugh, the walk from the door to the sofa.</p>
+            <p>if feelings could doodle, they'd draw us as two bears who keep finding each other.</p>
+            <p>this is me waving from my side of the day: hi, silly human. you are my favorite person.</p>
+            <img class="doodle d-give" style="position:absolute; left:-6px; bottom:-24px" src="assets/give_heart.png" alt="little figure giving a heart">
+            <div class="footer">made by roopa, for v.</div>
+          </div>
 
-    <!-- Back -->
-    <div class="side back">
-      <div class="grid">
-        <div class="letter">
-          <div class="sticky"><small>psst—open me again later</small></div>
-          <h2>i love you.</h2>
-          <p>i miss you in the small, ordinary moments—the stove clicking on, the quiet after a laugh, the walk from the door to the sofa.</p>
-          <p>if feelings could doodle, they'd draw us as two bears who keep finding each other.</p>
-          <p>this is me waving from my side of the day: hi, silly human. you are my favorite person.</p>
-          <img class="doodle d-give" style="position:absolute; left:-6px; bottom:-8px" src="assets/give_heart.png" alt="little figure giving a heart">
-          <div class="footer">made by roopa, for v.</div>
-        </div>
-        <div class="notes">
-          <div class="note" onclick="toggleNote(this)">
-            <b>bear fact</b>
-            <div class="reveal">you’re the soft side of my hoodie.</div>
-          </div>
-          <div class="note" onclick="toggleNote(this)">
-            <b>tonight’s plan</b>
-            <div class="reveal">call me. i’ll bring the worst jokes and the best attention.</div>
-          </div>
-          <div class="note" onclick="toggleNote(this)">
-            <b>evidence</b>
-            <div class="reveal">i kept your tea mug on the desk like a museum piece.</div>
-          </div>
-          <div class="note" onclick="toggleNote(this)">
-            <b>p.s.</b>
-            <div class="reveal">i’d still pick you in a room full of snacks.</div>
-          </div>
-          <div class="note" onclick="toggleNote(this)">
-            <b>one more</b>
-            <div class="reveal">i love you more than i planned to. which is perfect.</div>
+          <div class="notes">
+            <!-- ✅ onclick attributes removed (JS handles this automatically now) -->
+            <div class="note">
+              <b>bear fact</b>
+              <div class="reveal">you’re the soft side of my hoodie.</div>
+            </div>
+            <div class="note">
+              <b>tonight’s plan</b>
+              <div class="reveal">call me. i’ll bring the worst jokes and the best attention.</div>
+            </div>
+            <div class="note">
+              <b>evidence</b>
+              <div class="reveal">i kept your tea mug on the desk like a museum piece.</div>
+            </div>
+            <div class="note">
+              <b>p.s.</b>
+              <div class="reveal">i’d still pick you in a room full of snacks.</div>
+            </div>
+            <div class="note">
+              <b>one more</b>
+              <div class="reveal">i love you more than i planned to. which is perfect.</div>
+            </div>
           </div>
         </div>
+        <div class="tape t3"></div>
+        <div class="flip-badge" id="flip2">flip back</div>
       </div>
-      <div class="tape t3"></div>
-      <div class="flip-badge" id="flip2">flip back</div>
     </div>
   </div>
-</div>
+  
 
-<button class="sr-only" id="flipHidden" aria-label="flip postcard">flip</button>
-<script src="script.js"></script>
+  <button class="sr-only" id="flipHidden" aria-label="flip postcard">flip</button>
+  <script src="script.js"></script>
 </body>
 </html>
