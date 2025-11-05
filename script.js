@@ -23,17 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
     h.className = "heart";
     h.style.left = (x ?? Math.random() * window.innerWidth) + "px";
     h.style.bottom = "-40px";
-    h.style.animationDuration = 3000 + Math.random() * 2000 + "ms";
-    h.style.width = 18 + Math.random() * 22 + "px";
+    h.style.animationDuration = 2800 + Math.random() * 2000 + "ms";
+    h.style.width = 18 + Math.random() * 24 + "px";
     sky.appendChild(h);
     setTimeout(() => h.remove(), 4800);
   }
+
   function rain(n = 18) {
     for (let i = 0; i < n; i++) {
       setTimeout(() => drop(), i * 100);
     }
   }
-
-  // gentle rain on load
-  setTimeout(() => rain(12), 800);
 });
