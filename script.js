@@ -13,7 +13,11 @@ desk.addEventListener('dblclick', flip);
 
 function toggleNote(el) {
   el.classList.toggle('open');
+  el.querySelector('.reveal').style.maxHeight = el.classList.contains('open') 
+    ? el.querySelector('.reveal').scrollHeight + 'px' 
+    : '0px';
 }
+
 
 // gentle heart rain using black heart image
 const heartSrc = "assets/black_heart.png";
