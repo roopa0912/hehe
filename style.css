@@ -1,289 +1,66 @@
 :root {
   --paper:#f6f1e7;
-  --ink:#1a1a1a; /* soft dark pencil */
-  --ink-soft:#2a2a2a;
+  --ink:#222;
+  --ink-soft:#444;
   --tape:#f0e6d6;
   --shadow:0 15px 35px rgba(0,0,0,.15);
 }
 
-* { box-sizing:border-box; }
-html, body { height:100%; }
-
-body {
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
   margin:0;
-  background:
-    radial-gradient(800px 500px at 20% -10%, #fff8, transparent 60%),
-    radial-gradient(1000px 600px at 100% 120%, #fff8, transparent 60%),
-    linear-gradient(180deg, #eee9df, #f8f5ef);
-  font-family:"Homemade Apple", cursive;
+  background:linear-gradient(180deg,#eee9df,#f8f5ef);
+  font-family:"Homemade Apple",cursive;
   color:var(--ink);
-  display:grid;
-  place-items:center;
+  display:grid;place-items:center;
 }
 
-/* base postcard sizing */
-.desk {
-  position:relative;
-  width:min(1000px,96vw);
-  height:min(660px,80vh);
-  perspective:1400px;
-}
+.desk{position:relative;width:min(940px,95vw);height:min(620px,78vh);perspective:1400px;}
+.postcard{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.19,1,.22,1);}
+.open .postcard{transform:rotateY(180deg) translateZ(1px);box-shadow:0 0 40px rgba(0,0,0,.15);}
 
-/* 3D flip animation */
-.postcard {
-  position:absolute;
-  inset:0;
-  transform-style:preserve-3d;
-  transition:transform .9s cubic-bezier(.2,.8,.2,1);
-}
-.open .postcard { transform:rotateY(180deg) translateZ(1px); }
-
-/* sides */
-.side {
-  position:absolute;
-  inset:0;
-  border-radius:18px;
-  box-shadow:var(--shadow);
+.side{
+  position:absolute;inset:0;border-radius:18px;box-shadow:var(--shadow);
   background:var(--paper);
-  background-image:
-    radial-gradient(2px 2px at 16px 24px,#d6cdbf 10%,transparent 12%),
-    radial-gradient(2px 1.5px at 140px 80px,#e4dbcc 10%,transparent 12%),
-    linear-gradient(transparent 0 98%,rgba(0,0,0,.04) 99%);
-  backface-visibility:hidden;
-  overflow:hidden;
-  border:1px solid #e7dfd3;
+  backface-visibility:hidden;overflow:hidden;border:1px solid #e7dfd3;
 }
+.front,.back{padding:28px;}
+.front{display:flex;align-items:center;justify-content:center;gap:22px;}
+.back{transform:rotateY(180deg);display:flex;align-items:center;justify-content:center;}
 
-/* front side */
-.front {
-  padding:36px 40px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:40px;
-}
-.front > div {
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-.bear {
-  width:min(380px,45%);
-  flex-shrink:0;
-  filter:drop-shadow(0 10px 12px rgba(0,0,0,.08));
-}
-.title {
-  font-size:clamp(26px,3.8vw,38px);
-  line-height:1.3;
-  margin-bottom:12px;
-}
-.front-note {
-  max-width:440px;
-  font-size:clamp(20px,3vw,24px);
-  line-height:1.4;
-}
-.hint {
-  font-size:clamp(15px,2.4vw,17px);
-  opacity:.7;
-  margin-top:10px;
-}
+.tape{position:absolute;width:72px;height:22px;background:var(--tape);
+  box-shadow:0 4px 10px rgba(0,0,0,.08) inset,0 4px 10px rgba(0,0,0,.08);
+  opacity:.9;}
+.t1{top:-8px;left:28px;} .t2{top:-10px;right:36px;transform:rotate(6deg);}
+.t3{bottom:-10px;left:42%;transform:rotate(-4deg);}
 
-/* doodles */
-.doodle {
-  position:absolute;
-  opacity:.92;
-  transition:transform .2s ease;
+.bear{width:min(300px,40vw);filter:drop-shadow(0 8px 10px rgba(0,0,0,.08));}
+.doodle{position:absolute;opacity:.92;}
+.title{font-size:clamp(22px,3.6vw,32px);text-align:center;}
+.front-note{font-size:clamp(18px,3vw,22px);text-align:center;}
+.hint{font-size:clamp(14px,2.4vw,16px);opacity:.75;margin-top:8px;text-align:center;}
+.flip-badge{
+  position:absolute;right:18px;bottom:18px;
+  padding:10px 16px;border:1px dashed #cfc7bb;border-radius:14px;
+  background:#fff6;backdrop-filter:blur(4px);cursor:pointer;user-select:none;
+  z-index:5;
 }
-.doodle:hover { transform:rotate(-2deg) scale(1.04); }
-
-.d-heart { width:90px; }
-.d-flowers { width:120px; }
-.d-cat { width:130px; }
-.d-pink { width:100px; }
-.d-give { width:130px; }
-
-.tape {
-  position:absolute;
-  width:72px;
-  height:22px;
-  background:var(--tape);
-  box-shadow:0 4px 10px rgba(0,0,0,.08) inset, 0 4px 10px rgba(0,0,0,.08);
-  transform:rotate(-3deg);
-  opacity:.9;
+.letter{
+  position:relative;border:1px dashed #cfc7bb;border-radius:14px;
+  padding:22px 26px;width:90%;height:auto;max-width:700px;
 }
-.t1 { top:-8px; left:28px; }
-.t2 { top:-10px; right:36px; transform:rotate(6deg); }
-.t3 { bottom:-10px; left:40%; transform:rotate(-4deg); }
-
-/* flip button */
-.flip-badge {
-  position:absolute;
-  right:20px;
-  bottom:26px;
-  padding:8px 14px;
-  border:1px dashed #cfc7bb;
-  border-radius:14px;
-  background:#fff6;
-  backdrop-filter:blur(4px);
-  cursor:pointer;
-  user-select:none;
-  font-size:clamp(15px,2.2vw,17px);
-}
-
-/* back side */
-.back {
-  transform:rotateY(180deg);
-  padding:32px 30px 70px;
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:18px;
-  height:100%;
-}
-
-.letter {
-  border:1px dashed #cfc7bb;
-  border-radius:14px;
-  padding:20px 22px;
-  position:relative;
-}
-.letter h2 {
-  margin:0 0 10px;
-  font-size:clamp(22px,3.2vw,30px);
-}
-.letter p {
-  margin:8px 0;
-  font-size:clamp(19px,2.8vw,23px);
-  line-height:1.55;
-  color:var(--ink-soft);
-}
-.letter p:last-of-type { margin-bottom:70px; }
-
-/* sticky note */
-.sticky {
-  position:absolute;
-  right:-6px;
-  top:-8px;
-  transform:rotate(3deg);
-  padding:10px 12px;
-  background:#fff7;
-  border:1px solid #e5dccf;
-  border-radius:10px;
-}
-.sticky small {
-  font-size:clamp(13px,2.2vw,14px);
-}
-.sticky:hover { transform:rotate(0deg) scale(1.02); }
-
-/* notes column */
-.notes {
-  border:1px dashed #cfc7bb;
-  border-radius:14px;
-  padding:12px;
-  display:grid;
-  gap:12px;
-}
-.note {
-  background:#fff;
-  border:1px solid #e4dbcc;
-  border-radius:10px;
-  padding:12px 14px;
-  transition:transform .12s ease;
-  position:relative;
-  min-height:70px;
-}
-.note:hover { transform:translateY(-2px) rotate(-.5deg); }
-.note b { font-size:clamp(17px,2.4vw,19px); }
-.reveal {
-  display: block;
-  opacity: 0;
-  transform: translateY(4px);
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.25s ease;
-  will-change: transform, opacity, max-height;
-}
-
-.note.open .reveal {
-  opacity: 1;
-  transform: translateY(0);
-  max-height: 500px; /* enough space for any text */
-  padding-top: 4px;
-}
-
+.letter h2{margin:0 0 10px;font-size:clamp(22px,3vw,28px);}
+.letter p{margin:10px 0;font-size:clamp(18px,2.6vw,22px);line-height:1.55;color:var(--ink-soft);}
+.footer{text-align:center;font-size:14px;opacity:.65;margin-top:10px;}
+.sticky{position:absolute;right:-6px;top:-8px;transform:rotate(3deg);
+  padding:8px 10px;background:#fff7;border:1px solid #e5dccf;border-radius:10px;}
+.sticky small{font-size:clamp(13px,2.2vw,14px);}
 
 /* floating hearts */
-.sky { pointer-events:none; position:fixed; inset:0; overflow:hidden; }
-.heart { position:absolute; width:24px; opacity:.9; animation:floatUp linear forwards; }
-@keyframes floatUp {
-  0% { transform:translateY(20vh) rotate(-6deg); opacity:.95; }
-  100% { transform:translateY(-120vh) rotate(12deg); opacity:0; }
+.sky{pointer-events:none;position:fixed;inset:0;overflow:hidden;}
+.heart{position:absolute;width:24px;opacity:.9;animation:floatUp linear forwards;}
+@keyframes floatUp{
+  0%{transform:translateY(20vh) rotate(-6deg);opacity:.95;}
+  100%{transform:translateY(-120vh) rotate(12deg);opacity:0;}
 }
-
-/* footer note */
-.footer {
-  position:absolute;
-  left:0; right:0; bottom:-46px;
-  text-align:center;
-  font-size:14px;
-  opacity:.65;
-}
-
-/* accessibility */
-.sr-only {
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0,0,0,0);
-  white-space:nowrap;
-  border:0;
-}
-
-/* --- ✨ FINAL POLISH --- */
-.note.open {
-  animation: popOpen 0.25s ease-out;
-}
-@keyframes popOpen {
-  0% { transform: scale(0.97) rotate(-1deg); opacity: 0.8; }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; }
-}
-
-.postcard {
-  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
-}
-.open .postcard {
-  box-shadow: 0 0 40px rgba(0,0,0,0.15);
-  transform: rotateY(180deg) translateZ(1px);
-}
-/* make notes fully clickable and smooth */
-.note, .note * {
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-.notes {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.note {
-  transition: all 0.25s ease;
-  min-height: 66px;
-}
-.note.open {
-  background: #fffdfa;
-  transform: scale(1.01);
-}
-
-.note {
-  cursor: pointer;
-}
-
